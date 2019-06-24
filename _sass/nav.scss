@@ -4,7 +4,7 @@ $left-bar-width: 18px;
   background-color: $win-bg;
   max-height: 100%;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
   @include flexRow(flex-start, flex-start);
   align-items: stretch;
   color: $font-color;
@@ -61,13 +61,16 @@ $left-bar-width: 18px;
   }
 
   .file-explorer-cont {
-    width: 200px;
+    min-width: 200px;
+    max-width: 300px;
     background-color: $win-bg;
     position: relative;
     border-right: 1px solid #323232;
+    @include flexCol(flex-start, flex-start);
 
     .explorer-toolbar {
       box-sizing: border-box;
+      width: 100%;
       height: 26px;
       background-color: $win-bg;
       border-top: 1px solid #323232;
@@ -96,11 +99,24 @@ $left-bar-width: 18px;
       }
     }
     .explorer-cont {
+      min-width: 100%;
+      overflow: auto;
+      height: 100%;
       user-select: none;
+      @include flexCol(flex-start, stretch);
 
       .item {
+        padding-right: 16px;
         height: 20px;
+        white-space: nowrap;
         @include flexRow(flex-start, center);
+        box-sizing: border-box;
+
+        span {
+          max-width: 250px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
 
       .none {
