@@ -30,19 +30,19 @@
         <div class="item pl16 page-folder" onclick="clickItem(this, '{{c.label}}')">
           <img src="/assets/ic-img/folder_fold.png" class="ic-default arrow mr4" onclick="switchFold(this, '{{c.label}}')"/>
           <img src="/assets/ic-img/folder.png" class="ic-default mr4" />
-          <div>{{c.label}}</div>
+          <span>{{c.label}}</span>
         </div>
         {% endif %}
         {% for post in site[c.label] %}
           {% if page.url contains c.label and page.url contains post.title %}
           <div class="item pl54 selected none {{c.label}}" onclick="clickItem(this, '{{c.label}}/{{post.title}}', true)">
             <img src="/assets/ic-img/html.png" class="ic-default mr4" />
-            <div>{{post.title}}.html</div>
+            <span>{{post.title}}.html</span>
           </div>
           {% else %}
           <div class="item pl54 none {{c.label}}" onclick="clickItem(this, '{{c.label}}/{{post.title}}', true)">
             <img src="/assets/ic-img/html.png" class="ic-default mr4" />
-            <div>{{post.title}}.html</div>
+            <span>{{post.title}}.html</span>
           </div>
           {% endif %}
         {% endfor %}
