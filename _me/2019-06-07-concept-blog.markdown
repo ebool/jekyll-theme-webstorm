@@ -14,6 +14,6 @@ If you have a issue, please contact me by e-mail or github
 
 or
 
-[https://github.com/ebool/](https://github.com/ebool/){:target="_blank"}
+[https://github.com/ebool/](https://github.com/ebool/jekyll-theme-webstorm/issues){:target="_blank"}
 
 Thanks.
