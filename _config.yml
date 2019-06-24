@@ -1,0 +1,35 @@
+# Welcome to Jekyll them with Webstorm!!
+
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+
+title: jekyll theme with webstorm
+email: lastdroq@gmail.com # input your email
+username: ebool # input your name
+description: >- # this means to ignore newlines until "baseurl:"
+  jekyll theme with webstorm
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: jekyllrb
+github_username:  ebool
+
+
+# If you want to add a folder, add a collection.
+collections:
+  me:
+    output: true
+  project:
+    output: true
+
+
+# If you are using Sass @import statements
+sass:
+  sass_dir: _sass
+
+# Build settings
+
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+

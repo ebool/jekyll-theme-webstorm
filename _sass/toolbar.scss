@@ -1,0 +1,15 @@
+.toolbar-cont {
+  height: 30px;
+  background-color: $win-bg;
+  color: $font-color;
+  font-size: $font-size;
+  padding: 0 8px;
+  user-select: none;
+}
+.flex {
+  @include flexRow(flex-start, center);
+}
+.ic-right {
+  width: 15px;
+  height: 30px;
+}

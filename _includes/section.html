@@ -1,0 +1,16 @@
+<div class="section-cont" id="section-cont" tabindex="0">
+  <div class="section-header-cont none" id="section-header-cont"></div>
+  <div class="section-content-cont" id="section-content-cont">
+    {% for c in site.collections %}
+      {% for post in site[c.label] %}
+        <div class="none page" id="{{c.label}}/{{post.title}}">
+          {{post}}
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+<script>
+</script>
+<style>
+</style>

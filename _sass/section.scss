@@ -1,0 +1,71 @@
+$tab-size: 26px;
+
+.section-cont {
+  outline: none;
+  color: $font-color;
+  font-size: $font-size;
+  height: 100%;
+  @include flexCol(flex-start, flex-start);
+
+  .section-header-cont {
+    width: 100%;
+    background-color: $win-bg;
+    height: $tab-size;
+    box-sizing: border-box;
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+    @include flexRow(flex-start, center);
+
+    .tab {
+      height: 100%;
+      padding-left: 8px;
+      padding-right: 4px;
+      border-right: 1px solid $border-color;
+      user-select: none;
+      @include flexRow(center, center);
+
+      .close-icon {
+        color: #5c6266;
+
+        &:hover {
+          color: #768085;
+        }
+      }
+    }
+
+    .tab.selected {
+      background-color: #515658;
+      position: relative;
+
+      .bottom-border {
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        background-color: #4a7987;
+        width: 100%;
+        height: 3px;
+      }
+    }
+  }
+
+  .section-content-cont {
+    width: 100%;
+    // 100% - tab-size
+    height: calc(100% - 26px);
+    flex: 1;
+
+    .page {
+      background-color: $content-bg;
+      height: 100%;
+    }
+  }
+}
+.section-cont:focus {
+  .section-header-cont {
+    .tab.selected {
+      .bottom-border {
+        background-color: #439eb8;
+      }
+    }
+  }
+}

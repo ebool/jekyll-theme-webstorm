@@ -1,0 +1,140 @@
+$left-bar-width: 18px;
+
+.nav-cont {
+  background-color: $win-bg;
+  max-height: 100%;
+  height: 100%;
+  overflow: auto;
+  @include flexRow(flex-start, flex-start);
+  align-items: stretch;
+  color: $font-color;
+  font-size: $font-size;
+
+  .left-bar {
+    width: $left-bar-width;
+    background-color: $win-bg;
+    border-top: 1px solid $border-color;
+
+    %button {
+      user-select: none;
+      width: 110px;
+      height: $left-bar-width;
+      @include flexRow(center, center);
+      transform: rotate(-90deg) translateX(-110px);
+      transform-origin: top left;
+
+      .rotate-icon {
+        transform: rotate(90deg) translateY(4px);
+      }
+
+      .name {
+        font-size: 14px;
+        color: $font-color;
+        white-space: pre;
+      }
+    }
+
+    .button-default {
+      @extend %button;
+
+      &:hover {
+        background-color: $win-bg-hover;
+      }
+      .name {
+        color: $font-color;
+      }
+    }
+
+    .button-selected {
+      @extend %button;
+      background-color: $win-bg-selected;
+
+      .name {
+        color: $font-color-selected;
+      }
+    }
+  }
+
+  .border {
+    width: 1px;
+    background-color: $border-color;
+  }
+
+  .file-explorer-cont {
+    width: 200px;
+    background-color: $win-bg;
+    position: relative;
+    border-right: 1px solid #323232;
+
+    .explorer-toolbar {
+      box-sizing: border-box;
+      height: 26px;
+      background-color: $win-bg;
+      border-top: 1px solid #323232;
+      border-bottom: 1px solid #323232;
+      padding-left: 10px;
+
+      @include flexRow(flex-start, center);
+
+      .button {
+        width: 16px;
+        height: 16px;
+        padding: 2px;
+        border-radius: 2px;
+
+        img {
+          vertical-align: center;
+        }
+        &:hover {
+          background-color: #4c5052;
+        }
+      }
+      .border {
+        width: 1px;
+        height: 20px;
+        background-color: #515151;
+      }
+    }
+    .explorer-cont {
+      user-select: none;
+
+      .item {
+        height: 20px;
+        @include flexRow(flex-start, center);
+      }
+
+      .none {
+        display: none;
+      }
+
+      .rotate {
+        .arrow {
+          transform: rotate(90deg);
+        }
+      }
+
+      .selected {
+        background-color: #0d293e;
+      }
+    }
+
+  }
+
+}
+.nav-cont:focus {
+  outline: none;
+
+  .file-explorer-cont {
+
+    .explorer-toolbar {
+      background-color: #3b4754;
+    }
+
+    .explorer-cont {
+      .selected {
+        background-color: #2f65ca;
+      }
+    }
+  }
+
+}

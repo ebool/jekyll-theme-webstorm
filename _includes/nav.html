@@ -1,0 +1,161 @@
+<div class="nav-cont" id="nav-cont" tabindex="0">
+  <div class="left-bar">
+    <div id="drawer-btn" class="button-selected">
+      <span class="material-icons small-icon rotate-icon">folder</span>
+      <div class="name"><u>1</u>: Project</div>
+    </div>
+  </div>
+
+  <div class="border"></div>
+
+  <div id="drawer" class="file-explorer-cont">
+    <div class="explorer-toolbar">
+      <div class="project-icon mr6"></div>
+      <div class="label">Project</div>
+      <div class="spacer"></div>
+      <!--<div class="button mr4" onclick="onFocus('{{page.url}}')"><img src="/assets/ic-img/focus.png" class="ic-default hover" /></div>-->
+      <div class="button mr4" onclick="allFold()"><img src="/assets/ic-img/fold.png" class="ic-default" /></div>
+      <div class="border mr4"></div>
+      <div id="close-btn" class="button mr4"><img src="/assets/ic-img/remove.png" class="ic-default" /></div>
+    </div>
+    <div class="explorer-cont">
+      <div class="item rotate root" onclick="clickItem(this)">
+        <img src="/assets/ic-img/folder_fold.png" class="ic-default mr4 arrow" />
+        <img src="/assets/ic-img/folder.png" class="ic-default mr4" />
+        <div class="bold">{{site.username}}</div>
+      </div>
+
+      {% for c in site.collections %}
+        {% if c.label != 'posts' %}
+        <div class="item pl16 page-folder" onclick="clickItem(this, '{{c.label}}')">
+          <img src="/assets/ic-img/folder_fold.png" class="ic-default arrow mr4" onclick="switchFold(this, '{{c.label}}')"/>
+          <img src="/assets/ic-img/folder.png" class="ic-default mr4" />
+          <div>{{c.label}}</div>
+        </div>
+        {% endif %}
+        {% for post in site[c.label] %}
+          {% if page.url contains c.label and page.url contains post.title %}
+          <div class="item pl54 selected none {{c.label}}" onclick="clickItem(this, '{{c.label}}/{{post.title}}', true)">
+            <img src="/assets/ic-img/html.png" class="ic-default mr4" />
+            <div>{{post.title}}.html</div>
+          </div>
+          {% else %}
+          <div class="item pl54 none {{c.label}}" onclick="clickItem(this, '{{c.label}}/{{post.title}}', true)">
+            <img src="/assets/ic-img/html.png" class="ic-default mr4" />
+            <div>{{post.title}}.html</div>
+          </div>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<script>
+let isDrawer = true;
+let navCont = document.getElementById('nav-cont');
+let drawer = document.getElementById('drawer');
+let drawerBtn = document.getElementById('drawer-btn');
+let closeBtn = document.getElementById('close-btn');
+// let folderStructure = {
+//   '{{site.username}}': parseFolderStructure(`{{site.collections}}`)
+// };
+let previousSelected;
+let isFoldList = {};
+
+navCont.focus();
+previousSelected = document.getElementsByClassName('selected')[0];
+
+drawerBtn.addEventListener('click', switchDrawer);
+closeBtn.addEventListener('click', switchDrawer);
+
+function switchDrawer () {
+  isDrawer = !isDrawer;
+  setState();
+}
+
+let preClickTime = 0;
+
+function clickItem (e, name, isFile) {
+  if (isDBClick()) {
+    if (isFile) openFile(name);
+    else switchFold(e, name);
+    return;
+  }
+  focusItem(e);
+}
+
+function focusItem (e) {
+  if (previousSelected) previousSelected.classList.remove('selected');
+  e.classList.add('selected');
+  previousSelected = e;
+}
+
+function isDBClick () {
+  let curTime = +new Date();
+  let res = curTime - preClickTime < 300;
+  preClickTime = curTime;
+  return res;
+}
+
+function openFile (name) {
+  // all isFocused makes false;
+  for (let i of window.route) i.isFocused = false;
+
+  // check same file
+  for (let i of window.route) {
+    if (i.path === name) {
+      i.isFocused = true;
+      refresh();
+      focusSection();
+      return;
+    }
+  }
+
+  window.route.push({
+    path: name,
+    isFocused: true
+  });
+  refresh();
+  focusSection();
+}
+
+function switchFold (e, name) {
+  let target = e.children.length > 0 ? e : e.parentNode;
+  let list = document.getElementsByClassName(name);
+  if (isFoldList[name]) { // open -> close
+    for (let i of list) i.classList.add('none');
+    target.classList.remove('rotate');
+    isFoldList[name] = false;
+  } else { //close -> open
+    for (let i of list) i.classList.remove('none');
+    target.classList.add('rotate');
+    isFoldList[name] = true;
+  }
+}
+
+function allFold () {
+  // arrow 회전
+  let pageFolder = document.getElementsByClassName('page-folder');
+  for (let i of pageFolder) i.classList.remove('rotate');
+
+  // 하위 파일 숨기기
+  let list = Object.keys(isFoldList);
+  for (let name of list) for (let i of document.getElementsByClassName(name)) i.classList.add('none');
+}
+
+function onFocus (url) {
+  console.log(url);
+}
+
+function setState () {
+  if (isDrawer) {
+    drawerBtn.classList.add('button-selected');
+    drawerBtn.className = drawerBtn.className.replace(/\bbutton-default\b/g, '');
+    drawer.style.display = 'block';
+  } else {
+    drawerBtn.classList.add('button-default');
+    drawerBtn.className = drawerBtn.className.replace(/\bbutton-selected\b/g, '');
+    drawer.style.display = 'none';
+  }
+}
+</script>

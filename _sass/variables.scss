@@ -1,0 +1,27 @@
+
+// color
+
+$win-bg: #3c3f41;
+$win-bg-hover: #353739;
+$win-bg-selected: #2c2e2f;
+$font-color: #bbbbbb;
+$font-color-selected: #dcdcdc;
+$font-size: 14px;
+$border-color: #4b4b4b;
+$content-bg: #2b2b2b;
+
+// flex
+
+@mixin flexRow ($justify, $align) {
+  display: flex;
+  flex-direction: row;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin flexCol ($justify, $align) {
+  display: flex;
+  flex-direction: column;
+  justify-content: $justify;
+  align-items: $align;
+}
