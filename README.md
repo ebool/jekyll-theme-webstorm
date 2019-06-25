@@ -16,6 +16,10 @@ jekyll-theme with webstorm
 
 <br>
 
-### 3. You can visit https://{your github user name}.github.io/ (In my case: [https://ebool.github.io/](https://ebool.github.io/){:target="_blank"})
+### 3. You can visit https://{your github user name}.github.io/
+ 
+### In my case:
+
+### [https://ebool.github.io/](https://ebool.github.io/){:target="_blank"}
 
 <br>
