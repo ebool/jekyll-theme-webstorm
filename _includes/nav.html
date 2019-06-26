@@ -98,25 +98,7 @@ function isDBClick () {
 }
 
 function openFile (name) {
-  // all isFocused makes false;
-  for (let i of window.route) i.isFocused = false;
-
-  // check same file
-  for (let i of window.route) {
-    if (i.path === name) {
-      i.isFocused = true;
-      refresh();
-      focusSection();
-      return;
-    }
-  }
-
-  window.route.push({
-    path: name,
-    isFocused: true
-  });
-  refresh();
-  focusSection();
+  goTo(name);
 }
 
 function switchFold (e, name) {

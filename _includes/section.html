@@ -3,7 +3,7 @@
   <div class="section-content-cont" id="section-content-cont">
     {% for c in site.collections %}
       {% for post in site[c.label] %}
-        <div class="none page" id="{{c.label}}/{{post.title}}">
+        <div class="none page" id="{{c.label}}/{{post.title | replace: ' ', '-'}}">
           {{post}}
         </div>
       {% endfor %}

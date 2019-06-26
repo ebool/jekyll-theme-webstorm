@@ -7,17 +7,19 @@ function focusSection () {
 
 function refresh () {
   let toolbarCont = document.getElementById('toolbar-cont');
+  console.log('toolbarCont', toolbarCont);
   removeChildNode(toolbarCont);
   drawToolbar(toolbarCont);
 
   let sectionHeaderCont = document.getElementById('section-header-cont');
+  console.log('sectionHeaderCont', sectionHeaderCont);
   removeChildNode(sectionHeaderCont);
   drawSectionHeader(sectionHeaderCont);
 
   let sectionContentCont = document.getElementById('section-content-cont');
-  unShowChildNode(sectionContentCont)
+  console.log('sectionContentCont', sectionContentCont);
+  unShowChildNode(sectionContentCont);
   drawSectionContent(sectionContentCont);
-
 }
 
 function removeChildNode (node) { while (node.firstChild) node.removeChild(node.firstChild); }
@@ -28,7 +30,7 @@ function drawSectionContent (node) {
   if (window.route.length === 0) return;
 
   let res = window.route.filter(i => i.isFocused)[0];
-  for (let i of node.children) if (res.path === i.id) i.classList.remove('none');
+  for (let i of node.children) if (res.path.indexOf(i.id) > -1) i.classList.remove('none');
 }
 
 function drawSectionHeader (node) {
