@@ -15,7 +15,7 @@ function refresh () {
   drawSectionHeader(sectionHeaderCont);
 
   let sectionContentCont = document.getElementById('section-content-cont');
-  unShowChildNode(sectionContentCont)
+  unShowChildNode(sectionContentCont);
   drawSectionContent(sectionContentCont);
 
 }
@@ -28,7 +28,7 @@ function drawSectionContent (node) {
   if (window.route.length === 0) return;
 
   let res = window.route.filter(i => i.isFocused)[0];
-  for (let i of node.children) if (res.path === i.id) i.classList.remove('none');
+  for (let i of node.children) if (res.path.indexOf(i.id) > -1) i.classList.remove('none');
 }
 
 function drawSectionHeader (node) {
