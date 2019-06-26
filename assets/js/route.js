@@ -1,4 +1,4 @@
-window.onload = () => drawerPageByPath(window.location.pathname);
+window.onload = () => drawerPageByPath(decodeURIComponent(window.location.pathname));
 
 (function (history) {
   /** detect pushState */
