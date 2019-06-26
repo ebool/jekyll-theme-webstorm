@@ -1,3 +1,5 @@
+window.onload = () => drawerPageByPath(window.location.pathname);
+
 (function (history) {
   /** detect pushState */
   let pushState = history.pushState;
@@ -13,7 +15,17 @@
   };
 })(window.history);
 
+/** detect popState */
+window.addEventListener('popstate', (e) => {
+  drawerPageByPath(window.location.pathname);
+});
+
 function drawerPageByPath (path) {
+  if (!path || path === '/') return;
+
+  // all isFocused makes false;
+  for (let i of window.route) i.isFocused = false;
+
   // check same file
   for (let i of window.route) {
     if (i.path === path) {
@@ -29,15 +41,11 @@ function drawerPageByPath (path) {
   focusSection();
 }
 
-/** detect popState */
-window.addEventListener('popstate', (e) => {
-  console.log('popstate', e);
-});
 
 function goTo (path) {
-  window.history.pushState({}, '', `/${path}`);
+  window.history.pushState({}, '', `/${path.replace(/ /gi, '-')}`);
 }
 
 function replace (path) {
-  window.history.replaceState({}, '', `/${path}`);
+  window.history.replaceState({}, '', `/${path.replace(/ /gi, '-')}`);
 }

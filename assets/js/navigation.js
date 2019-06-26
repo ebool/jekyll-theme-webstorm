@@ -7,17 +7,19 @@ function focusSection () {
 
 function refresh () {
   let toolbarCont = document.getElementById('toolbar-cont');
+  console.log('toolbarCont', toolbarCont);
   removeChildNode(toolbarCont);
   drawToolbar(toolbarCont);
 
   let sectionHeaderCont = document.getElementById('section-header-cont');
+  console.log('sectionHeaderCont', sectionHeaderCont);
   removeChildNode(sectionHeaderCont);
   drawSectionHeader(sectionHeaderCont);
 
   let sectionContentCont = document.getElementById('section-content-cont');
+  console.log('sectionContentCont', sectionContentCont);
   unShowChildNode(sectionContentCont);
   drawSectionContent(sectionContentCont);
-
 }
 
 function removeChildNode (node) { while (node.firstChild) node.removeChild(node.firstChild); }
